@@ -124,7 +124,7 @@ ycl_noz=Ycl(alpha2p*180/pi, alpha3p*180/pi, cstator, L2, 0)
 
 y_noz = KRe*yp_noz + ys_noz + ycl_noz;
 
-Kloss_N=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_noz+1)-y_noz)
+Kloss_N=()^(gamma/(gamma-1))/(1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1))
 
 
 %% --------------------- Loss calculations ------------------------ %%
