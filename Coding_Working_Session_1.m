@@ -136,9 +136,9 @@ yp1_rot =Yp1(scopt,alpha3p*180/pi)
 xi_rot =(90-abs(alpha1))/(90-abs(alpha3p)*180/pi) % CONFIRM WITH PROF...alpha 1 = 90?
 yp_rot=abs(yp0_rot+(xi_rot^2)*(yp1_rot-yp0_rot)) % CONFIRM WITH PROF
 
-mu3=DynVisc_H2(T3w)
+mu3=DynVisc_H2(T3)
 rho_rotor = (rho2+rho3)/2;
-nu3 = mu3/rho_rotor;
+nu3 = mu3/rho3;
 [KRe_rotor,Re_c] = K_Re(W3, crot, nu3)
 
 ys_rot= Ys(alpha1,alpha3p*180/pi,crot,L3)
@@ -150,12 +150,14 @@ ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL)
 y_rot = 0.10828
 
 exp = gamma/(gamma-1);
-
+exp1 =(gamma-1)/(gamma);
 
 Kloss_R=(((1+((gamma-1)*M3w^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M3w^2)/2)^(gamma/(gamma-1)))*(y_rot+1)-y_rot)
 T03 = T3*(1+((gamma-1)/2)*M3^2);
+
 P03 = P3ver*((1+((gamma-1)/2)*M3^2)^exp);
-ett = (1-(T03/T01)) / (1-(P03/P01)^((gamma-1)/gamma))
+
+ett = (1-(T3/T01)) / (1-(P3/P01)^exp1) % Check with Prof - input values may be incorrect
 
 %Power Calculations
 massflow = 3;
@@ -287,3 +289,4 @@ function [DynVisc] = DynVisc_H2(Temp)
     % T = inlet temp
     DynVisc=mu_ref*((T_ref+C_ref)/(Temp+C_ref))*((Temp/T_ref)^(3/2));
 end
+
