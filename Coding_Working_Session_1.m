@@ -64,11 +64,12 @@ alpha3p = atan(W3a/W3u);
 T2 = T01-C2^2/(2*cp);
 T02=T01;
 a2 = sqrt(gamma*Rgas*T2);
-M2 = C2/a2; M2a=M2;
+M2 = C2/a2; 
+M2a=M2;
 M2w = W2/a2;
-T2w = T2*(1 + (gamma-1)/2*M2w^2);
-T3 = T2w - W3^2/(2*cp);
+T2w = T2*(1 + ((gamma-1)/2)*M2w^2);
 T3w=T2w;
+T3 = T2w - (W3^2)/(2*cp);
 a3 = sqrt(gamma*Rgas*T3);
 M3w = W3/a3;
 M3 = C3/a3; M3a = M3;
@@ -135,19 +136,31 @@ yp1_rot =Yp1(scopt,alpha3p*180/pi)
 xi_rot =(90-abs(alpha1))/(90-abs(alpha3p)*180/pi) % CONFIRM WITH PROF...alpha 1 = 90?
 yp_rot=abs(yp0_rot+(xi_rot^2)*(yp1_rot-yp0_rot)) % CONFIRM WITH PROF
 
-mu=DynVisc_H2(T3)
+mu3=DynVisc_H2(T3w)
 rho_rotor = (rho2+rho3)/2;
-nu=mu/rho_rotor;
-[KRe_rotor,Re_c] = K_Re(W3, crot, nu)
+nu3 = mu3/rho_rotor;
+[KRe_rotor,Re_c] = K_Re(W3, crot, nu3)
 
 ys_rot= Ys(alpha1,alpha3p*180/pi,crot,L3)
 
 dL=0.0075; % CONFIRM WITH PROF: Given in Lecture 5
 ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL)
 
-y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+%y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+y_rot = 0.10828
 
-Kloss_R=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_rot+1)-y_rot)
+exp = gamma/(gamma-1);
+
+
+Kloss_R=(((1+((gamma-1)*M3w^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M3w^2)/2)^(gamma/(gamma-1)))*(y_rot+1)-y_rot)
+T03 = T3*(1+((gamma-1)/2)*M3^2);
+P03 = P3ver*((1+((gamma-1)/2)*M3^2)^exp);
+ett = (1-(T03/T01)) / (1-(P03/P01)^((gamma-1)/gamma))
+
+%Power Calculations
+massflow = 3;
+work = U * C2u;
+Power = work * massflow
 
 
 %% --------------------- Loss calculations ------------------------ %%
