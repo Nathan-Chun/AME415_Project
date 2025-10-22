@@ -84,8 +84,10 @@ rho3 = P3/(Rgas*T3);
 
 % --------------------- Geometry ------------------------ %
 A2 = mdot/(rho2*C2a); A3 = mdot/(rho3*C3a);
-L2 = A2/(2*pi*rmean*BL); L3 = A3/(2*pi*rmean*BL);
-L2D = L2/(rmean*2); L3D = L3/(rmean*2);
+L2 = A2/(2*pi*rmean*BL); 
+L3 = A3/(2*pi*rmean*BL);
+L2D = L2/(rmean*2); 
+L3D = L3/(rmean*2);
 
 % --------------------- stator/nozzle ------------------------ %
 sc0stator = 0.427 + abs(alpha2*180/pi)/58 - (abs(alpha2*180/pi)/93)^2;
@@ -105,7 +107,7 @@ srot = 2*pi*rmean/Nb3; % Pitch rot
 crot = srot/scopt; % Chord rot
 bzrot = srot/sbzrot % bz rot
 betasrot = asin(bzrot/crot)*180/pi
-
+%%
 % --------------------- Loss calculations ------------------------ %
 alpha1=90; % degree..Lecture 5 Row 1 calculation...need to follow up
 yp0 =Yp0(sc0stator,alpha2*180/pi)
@@ -125,6 +127,27 @@ ycl_noz=Ycl(alpha2p*180/pi, alpha3p*180/pi, cstator, L2, 0)
 y_noz = KRe*yp_noz + ys_noz + ycl_noz;
 
 Kloss_N=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_noz+1)-y_noz)
+
+% --------------------- Loss calculations Rotor ------------------------ %
+alpha1=alpha2p*180/pi; % degree..Lecture 5 Row 1 calculation...need to follow up
+yp0_rot =Yp0(sc0,alpha3p*180/pi)
+yp1_rot =Yp1(scopt,alpha3p*180/pi)
+xi_rot =(90-abs(alpha1))/(90-abs(alpha3p)*180/pi) % CONFIRM WITH PROF...alpha 1 = 90?
+yp_rot=abs(yp0_rot+(xi_rot^2)*(yp1_rot-yp0_rot)) % CONFIRM WITH PROF
+
+mu=DynVisc_H2(T3)
+rho_rotor = (rho2+rho3)/2;
+nu=mu/rho_rotor;
+[KRe_rotor,Re_c] = K_Re(W3, crot, nu)
+
+ys_rot= Ys(alpha1,alpha3p*180/pi,crot,L3)
+
+dL=0.0075; % CONFIRM WITH PROF: Given in Lecture 5
+ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL)
+
+y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+
+Kloss_R=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_rot+1)-y_rot)
 
 
 %% --------------------- Loss calculations ------------------------ %%
