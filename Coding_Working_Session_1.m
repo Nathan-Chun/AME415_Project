@@ -17,9 +17,9 @@ Psi = 1.10 % Loading factor
 BL = 0.90 % Flow blockage
 
 % Initial Guess at Efficiency and Loss Factors
-ett = 0.900 % Total to total efficiency
-Kloss_N = 0.998 % Stator total pressure loss factor
-Kloss_R = 0.9920 % Rotor total pressure loss factor
+ett_guess = 0.900 % Total to total efficiency
+Kloss_N_guess = 0.998 % Stator total pressure loss factor
+Kloss_R_guess = 0.9920 % Rotor total pressure loss factor
 
 
 %% --------------------- 11.2 First Pass, Include Loss System Calculations ------------------------ %%
@@ -32,10 +32,10 @@ T3is = T01*(P3/P01)^((gamma-1)/gamma);
 C0 = sqrt(2*cp*(T01-T3is));
 alpha2 = atan(Phi/Psi); % REMEMBER TO CONVERT TO DEGREES FOR PRINTED OUTPUT
 Rc = 1-Psi/2;
-Ca = sqrt((C0^2/2)/(cot(alpha2)/(Phi*ett)+0.5));
+Ca = sqrt((C0^2/2)/(cot(alpha2)/(Phi*ett_guess)+0.5));
 U = Ca/Phi;
 delh0is = C0^2/2 - Ca^2/2;
-w = delh0is * ett;
+w = delh0is * ett_guess;
 pow = w* mdot;
 rmean = 60*U/(2*pi*Nrpm); 
 
@@ -75,10 +75,10 @@ M3w = W3/a3;
 M3 = C3/a3; M3a = M3;
 
 % --------------------- Pressures/Convergence ------------------------ %
-P02 = Kloss_N * P01;
+P02 = Kloss_N_guess * P01;
 P2 = P02/(1+(gamma-1)/2*M2^2)^((gamma)/(gamma-1));
 P2w = P2*(1+(gamma-1)/2*M2w^2)^(gamma/(gamma-1));
-P3w = Kloss_R * P2w;
+P3w = Kloss_R_guess * P2w;
 P3ver = P3w/(1 + (gamma-1)/2 * M3w^2)^(gamma/(gamma-1));
 rho2 = P2/(Rgas*T2);
 rho3 = P3/(Rgas*T3);
@@ -101,8 +101,8 @@ betas = asin(bzstator/cstator)*180/pi;
 % --------------------- Rotor ------------------------ %
 sc0 = 0.427+abs(alpha3p*180/pi)/58 - (abs(alpha3p*180/pi)/93)^2;
 sc1 = 0.224 + (1.575 - abs(alpha3p*180/pi)/90)*(abs(alpha3p*180/pi)/90);
-xi = (90 - abs(alpha2p)*180/pi)/(90-abs(alpha3p)*180/pi);
-scopt = sc0 + (sc1 - sc0)*abs(xi)*xi; % sc rot
+xi_rot = (90 - abs(alpha2p)*180/pi)/(90-abs(alpha3p)*180/pi);
+scopt = sc0 + (sc1 - sc0)*abs(xi_rot)*xi_rot; % sc rot
 sbzrot = 0.8/(2*sin(alpha3p)^2*(cot(alpha2p) - cot(alpha3p)));
 srot = 2*pi*rmean/Nb3; % Pitch rot
 crot = srot/scopt; % Chord rot
