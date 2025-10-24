@@ -1,7 +1,8 @@
+
 clear, clc
 
 disp('Running main script');
-run('Coding_Working_Session_1.m');  % calls another script or function
+run('ProjVals_Coding_Working_Session_1.m');  % calls another script or function
 
 fileID = fopen('ordered_variables.txt','w');
 

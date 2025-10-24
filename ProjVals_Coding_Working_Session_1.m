@@ -3,11 +3,11 @@
 %% --------------------- 11.1 Top Code Input ------------------------ %%
 clear
 % Boundary Conditions
-P01 = 185000.00; % Pa
-T01 = 800.00; %K
-P3 = 170000.00; %Pa
-mdot = 3.00 %kg/s
-Nrpm = 10000.00; %RPM
+P01 = 11617665.50; % Pa
+T01 = 460.00; %K
+P3 = 10804084.00; %Pa
+mdot = 32.00 %kg/s
+Nrpm = 15000.00; %RPM
 
 % Geometry and Design Parameters
 Nb2 = 85.00 % # of Airfoils stator
@@ -24,7 +24,6 @@ Kloss_R_guess = 0.9920 % Rotor total pressure loss factor
 
 %% --------------------- 11.2 First Pass, Include Loss System Calculations ------------------------ %%
 clc;
-format long
 gamma = 1.4056;
 Rgas = 4124.400;
 cp = 14292.300;
@@ -38,6 +37,7 @@ U = Ca/Phi;
 delh0is = C0^2/2 - Ca^2/2;
 w = delh0is * ett_guess;
 pow = w* mdot;
+% pow = 4800;
 rmean = 60*U/(2*pi*Nrpm); 
 
 % --------------------- Stator Exit Kinematics ------------------------ %
@@ -80,7 +80,7 @@ P02 = Kloss_N_guess * P01;
 P2 = P02/(1+(gamma-1)/2*M2^2)^((gamma)/(gamma-1));
 P2w = P2*(1+(gamma-1)/2*M2w^2)^(gamma/(gamma-1));
 P3w = Kloss_R_guess * P2w;
-P3ver = P3w/(1 + ((gamma-1)*M3w^2)/2)^(gamma/(gamma-1));
+P3ver = P3w/(1 + (gamma-1)/2 * M3w^2)^(gamma/(gamma-1));
 rho2 = P2/(Rgas*T2);
 rho3 = P3/(Rgas*T3);
 
@@ -108,47 +108,47 @@ sbzrot = 0.8/(2*sin(alpha3p)^2*(cot(alpha2p) - cot(alpha3p)));
 srot = 2*pi*rmean/Nb3; % Pitch rot
 crot = srot/scopt; % Chord rot
 bzrot = srot/sbzrot % bz rot
-betasrot = asin(bzrot/crot)*180/pi;
+betasrot = asin(bzrot/crot)*180/pi
 %%
 % --------------------- Loss calculations ------------------------ %
 alpha1=90; % degree..Lecture 5 Row 1 calculation...need to follow up
-yp0 =Yp0(sc0stator,alpha2*180/pi);
-yp1 =Yp1(sc0stator,alpha2*180/pi);
-xi =(90-abs(alpha1))/(90-abs(alpha2)*180/pi); % CONFIRM WITH PROF...alpha 1 = 90?
-yp_noz=abs(yp0+(xi^2)*(yp1-yp0)); % CONFIRM WITH PROF
+yp0 =Yp0(sc0stator,alpha2*180/pi)
+yp1 =Yp1(sc0stator,alpha2*180/pi)
+xi =(90-abs(alpha1))/(90-abs(alpha2)*180/pi) % CONFIRM WITH PROF...alpha 1 = 90?
+yp_noz=abs(yp0+(xi^2)*(yp1-yp0)) % CONFIRM WITH PROF
 
-mu=DynVisc_H2(T2);
-nu=mu/rho2;
-[KRe,Re_c] = K_Re(C2, cstator, nu);
+mu=DynVisc_H2(T2)
+nu=mu/rho2
+[KRe,Re_c] = K_Re(C2, cstator, nu)
 
-ys_noz= Ys(alpha1,alpha2*180/pi,cstator,L2);
+ys_noz= Ys(alpha1,alpha2*180/pi,cstator,L2)
 
 dL=0; % CONFIRM WITH PROF: IS dL 0 BECAUSE NOZZLE CLEARANCE IS 0 (LEC5 PG 16)
-ycl_noz=Ycl(alpha2p*180/pi, alpha3p*180/pi, cstator, L2, 0);
+ycl_noz=Ycl(alpha2p*180/pi, alpha3p*180/pi, cstator, L2, 0)
 
 y_noz = KRe*yp_noz + ys_noz + ycl_noz;
 
-Kloss_N=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_noz+1)-y_noz);
+Kloss_N=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_noz+1)-y_noz)
 
 % --------------------- Loss calculations Rotor ------------------------ %
 alpha1=alpha2p*180/pi; % degree..Lecture 5 Row 1 calculation...need to follow up
-yp0_rot =Yp0(sc0,alpha3p*180/pi);
-yp1_rot =Yp1(scopt,alpha3p*180/pi);
-xi_rot =(90-abs(alpha1))/(90-abs(alpha3p)*180/pi); % CONFIRM WITH PROF...alpha 1 = 90?
-yp_rot=abs(yp0_rot+(xi_rot^2)*(yp1_rot-yp0_rot)); % CONFIRM WITH PROF
+yp0_rot =Yp0(sc0,alpha3p*180/pi)
+yp1_rot =Yp1(scopt,alpha3p*180/pi)
+xi_rot =(90-abs(alpha1))/(90-abs(alpha3p)*180/pi) % CONFIRM WITH PROF...alpha 1 = 90?
+yp_rot=abs(yp0_rot+(xi_rot^2)*(yp1_rot-yp0_rot)) % CONFIRM WITH PROF
 
-mu3=DynVisc_H2(T3);
+mu3=DynVisc_H2(T3)
 rho_rotor = (rho2+rho3)/2;
 nu3 = mu3/rho3;
-[KRe_rotor,Re_c] = K_Re(W3, crot, nu3);
+[KRe_rotor,Re_c] = K_Re(W3, crot, nu3)
 
-ys_rot= Ys(alpha1,alpha3p*180/pi,crot,L3);
+ys_rot= Ys(alpha1,alpha3p*180/pi,crot,L3)
 
 dL=0.0075; % CONFIRM WITH PROF: Given in Lecture 5
-ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL);
+ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL)
 
-%y_rot = KRe*yp_rot + ys_rot + ycl_rot;
-y_rot = 0.10828;
+y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+% y_rot = 0.10828
 
 exp = gamma/(gamma-1);
 exp1 =(gamma-1)/(gamma);
@@ -158,21 +158,20 @@ T03 = T3*(1+((gamma-1)/2)*M3^2);
 
 P03 = P3ver*((1+((gamma-1)/2)*M3^2)^exp);
 
-ett = (1-(T3/T01)) / (1-(P3/P01)^exp1) % Check with Prof - input values may be incorrect
+ett = (1-(T03/T01)) / (1-(P03/P01)^exp1); % Check with Prof - input values may be incorrect
 
 %Power Calculations
-massflow = 3;
+% massflow = 3;
 work = U * C2u;
-Power = work * massflow;
+Power = work * mdot/745.7;
 
 %% --------------------- Set B ------------------------ %%
 %% --------------------- Input ------------------------ %%
-% All inputs same as Set B
-nozInAng = 90; % Deg
 
 fscale=P3/P3ver
 Ca_new=Ca/fscale
 U_new=U/fscale
+
 
 
 %% --------------------- Functions ------------------------ %%
