@@ -1,4 +1,4 @@
-## AME415 Project
+# AME415 Project
 
 ## Code_Working_Session_1.m
 - Contains correct Part A with verification
