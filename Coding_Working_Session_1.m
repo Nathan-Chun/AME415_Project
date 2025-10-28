@@ -157,7 +157,7 @@ T03 = T3*(1+((gamma-1)/2)*M3^2);
 
 P03 = P3ver*((1+((gamma-1)/2)*M3^2)^exp);
 
-ett = (1-(T3/T01)) / (1-(P3/P01)^exp1) % Check with Prof - input values may be incorrect
+ett = (1-(T03/T01)) / (1-(P03/P01)^exp1) % Check with Prof - input values may be incorrect
 
 %Power Calculations
 massflow = 3;
