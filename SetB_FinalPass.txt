@@ -1,0 +1,135 @@
+SET B. FINAL PASS calculations of a calibration case turbine
+============================================================
+
+=========== INPUT ==============================================
+Po1          =  185000.0000 Pa
+To1          =     800.0000 K
+P3           =  170000.0000 Pa
+Massflow     =       3.0000 Kg/s
+Shaft Speed  =   10000.0000 RPM
+Noz In angle =      90.0000 deg
+
+------- fluid thermodynamic properties ------------
+gamma =       1.4056
+Rgas  =    4124.4000 J/Kg-K
+Cp    =   14292.3000 J/Kg-K
+
+------- Choice of design parameters ---------------
+Phi     =       0.4500
+Psi     =       1.1000
+Stator nr vanes  =      85.0000
+Rotor nr blades  =      80.0000
+
+------- First guess values of parameters ----------
+Efficiency  =       0.9000
+Kloss_N     =       0.9980
+Kloss_R     =       0.9920
+Blockage    =       0.9000
+
+======================= Output =================================
+Co     =     742.4396 m/s
+U      =     458.7987 m/s
+Ca     =     206.4594 m/s
+
+----------------- stator  exit kinematics ----------------------
+C2     =     545.2760 m/s
+Cu2    =     504.6786 m/s
+Ca2    =     206.4594 m/s
+Wu2    =      45.8799 m/s
+Wa2    =     206.4594 m/s
+W2     =     211.4958 m/s
+alfa2  =      22.2490 deg
+alfa2p =      77.4712 deg
+
+----------------- rotor  exit kinematics ----------------------
+Wa3    =     206.4594 m/s
+Wu3    =    -458.7987 m/s
+W3     =     503.1121 m/s
+Ca3    =     206.4594 m/s
+Cu3    =       0.0000 m/s
+C3     =     206.4594 m/s
+alfa3p =     -24.2277 deg
+
+----------------- thermodynamic quantities stator exit ---------------
+a2     =    2139.5103 m/s
+Mw2    =       0.0989
+Ma2    =       0.2549
+T2     =     789.5984 K
+To2    =     800.0000 K
+Tw2    =     791.1632 K
+
+----------------- thermodynamic quantities rotor exit ----------------
+a3     =      2129.61 m/s
+Mw3    =       0.2362
+Ma3    =       0.0969
+T3     =     782.3080 K
+To3    =     783.7991 K
+Tw3    =     791.1627 K
+
+----------------- Pressures/Convergence ----------------------
+Po1    =  185000.0000 Pa
+Po2    =  184462.2382 Pa
+P2     =  176283.4733 Pa
+Pw2    =  177497.0817 Pa
+rho2   =       0.0541 Kg/m^3
+Pw3    =  176761.9696 Pa
+P3     =  170000.0000 Pa
+P3ver  =  170000.1864 Pa
+Po3    =  171125.7511 Pa
+rho3   =       0.0527 Kg/m^3
+
+-------- geometry ------------
+rmean=      0.43812 m
+L2   =      0.10835 m
+L3   =      0.11132 m
+L2/D =       0.1237
+L3/D =       0.1270
+
+--stator/nozzle --------------
+(s/c)noz   =       0.7534
+(s/bz)noz  =       1.1414
+pitch noz  =       0.0324 m
+chord noz  =       0.0430 m
+b_z noz    =       0.0284 m
+beta_s noz =      41.3023 deg
+
+--rotor ----------------------
+(s/c)0 rot  =       0.7769
+(s/c)1 rot  =       0.5755
+xi          =       0.1905
+(s/c)rot   =       0.7695
+(s/bz)rot  =       0.9717
+pitch rot  =       0.0344 m
+chord rot  =       0.0447 m
+b_z rot    =       0.0354 m
+beta_s rot =      52.3677 deg
+
+------------ LOSS Calculations -----------------------
+------- STATOR --------------------
+Yp_0       =      0.03397
+Yp_1       =      0.14010
+xi         =      0.00000
+Yp_noz     =      0.03397
+KRe_noz    =      1.13634
+Ys_noz     =      0.02715
+Ycl_noz    =      0.00000
+Y_noz      =      0.06575
+New Kloss_N =      0.99709 m/s
+
+------- ROTOR --------------------
+Yp_0       =      0.03023
+Yp_1       =      0.13052
+xi         =      0.19049
+Yp_rot     =      0.03387
+KRe_rot    =      1.17253
+Ys_rot     =      0.03210
+Ycl_rot    =      0.03690
+Y_rot      =      0.10872
+New Kloss_R =      0.99586 m/s
+
+========== Performance ========================================
+T-T Efficiency =       0.9104
+T-T EffviaWork =       0.9105
+T-S Efficiency =       0.8401
+Power      =     931.5244 hp
+Power Ett  =     931.3835 hp

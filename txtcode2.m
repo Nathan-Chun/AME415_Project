@@ -1,0 +1,211 @@
+clear, clc
+
+disp('Running main script');
+run('Code_Working_Session_2.m');  % calls another script or function
+
+fprintf('SET B. FINAL PASS calculations of a calibration case turbine\n');
+fprintf('============================================================\n\n');
+
+%% =========== INPUT ==============================================
+fprintf('=========== INPUT ==============================================\n');
+fprintf('Po1          =  185000.0000 Pa\n');
+fprintf('To1          =     800.0000 K\n');
+fprintf('P3           =  170000.0000 Pa\n');
+fprintf('Massflow     =       3.0000 Kg/s\n');
+fprintf('Shaft Speed  =   10000.0000 RPM\n');
+fprintf('Noz In angle =      90.0000 deg\n\n');
+
+fprintf('------- fluid thermodynamic properties ------------\n');
+fprintf('gamma =       1.4056\n');
+fprintf('Rgas  =    4124.4000 J/Kg-K\n');
+fprintf('Cp    =   14292.3000 J/Kg-K\n\n');
+
+fprintf('------- Choice of design parameters ---------------\n');
+fprintf('Phi     =       0.4500\n');
+fprintf('Psi     =       1.1000\n');
+fprintf('Stator nr vanes  =      85.0000\n');
+fprintf('Rotor nr blades  =      80.0000\n\n');
+
+fprintf('------- First guess values of parameters ----------\n');
+fprintf('Efficiency  =       0.9000\n');
+fprintf('Kloss_N     =       0.9980\n');
+fprintf('Kloss_R     =       0.9920\n');
+fprintf('Blockage    =       0.9000\n\n');
+
+%% ======================= OUTPUT ================================
+fprintf('======================= Output =================================\n');
+fprintf('C0     =  %12.4f m/s\n', C0);
+fprintf('U      =  %12.4f m/s\n', U);
+fprintf('Ca     =  %12.4f m/s\n\n', Ca);
+
+fprintf('----------------- stator  exit kinematics ----------------------\n');
+fprintf('C2     =  %12.4f m/s\n', C2);
+fprintf('Cu2    =  %12.4f m/s\n', Cu2);
+fprintf('Ca2    =  %12.4f m/s\n', Ca2);
+fprintf('Wu2    =  %12.4f m/s\n', Wu2);
+fprintf('Wa2    =  %12.4f m/s\n', Wa2);
+fprintf('W2     =  %12.4f m/s\n', W2);
+fprintf('alfa2  =  %12.4f deg\n', alfa2);
+fprintf('alfa2p =  %12.4f deg\n\n', alfa2p);
+
+fprintf('----------------- rotor  exit kinematics ----------------------\n');
+fprintf('Wa3    =  %12.4f m/s\n', Wa3);
+fprintf('Wu3    =  %12.4f m/s\n', Wu3);
+fprintf('W3     =  %12.4f m/s\n', W3);
+fprintf('Ca3    =  %12.4f m/s\n', Ca3);
+fprintf('Cu3    =  %12.4f m/s\n', Cu3);
+fprintf('C3     =  %12.4f m/s\n', C3);
+fprintf('alfa3p =  %12.4f deg\n\n', alfa3p);
+
+fprintf('----------------- thermodynamic quantities stator exit ---------------\n');
+fprintf('a2     =  %12.4f m/s\n', a2);
+fprintf('Mw2    =  %12.4f\n', Mw2);
+fprintf('Ma2    =  %12.4f\n', Ma2);
+fprintf('T2     =  %12.4f K\n', T2);
+fprintf('To2    =  %12.4f K\n', To2);
+fprintf('Tw2    =  %12.4f K\n\n', Tw2);
+
+fprintf('----------------- thermodynamic quantities rotor exit ----------------\n');
+fprintf('a3     =  %12.4f m/s\n', a3);
+fprintf('Mw3    =  %12.4f\n', Mw3);
+fprintf('Ma3    =  %12.4f\n', Ma3);
+fprintf('T3     =  %12.4f K\n', T3);
+fprintf('To3    =  %12.4f K\n', T03);
+fprintf('Tw3    =  %12.4f K\n\n', Tw3);
+
+fprintf('----------------- Pressures/Convergence ----------------------\n');
+fprintf('Po1    =  %12.4f Pa\n', P01);
+fprintf('Po2    =  %12.4f Pa\n', P02);
+fprintf('P2     =  %12.4f Pa\n', P2);
+fprintf('Pw2    =  %12.4f Pa\n', Pw2);
+fprintf('rho2   =  %12.4f Kg/m^3\n', rho2);
+fprintf('Pw3    =  %12.4f Pa\n', Pw3);
+fprintf('P3     =  %12.4f Pa\n', P3);
+fprintf('P3ver  =  %12.4f Pa\n', P3ver);
+fprintf('Po3    =  %12.4f Pa\n', P03);
+fprintf('rho3   =  %12.4f Kg/m^3\n\n', rho3);
+
+fprintf('-------- geometry ------------\n');
+fprintf('rmean=  %12.5f m\n', rmean);
+fprintf('L2   =  %12.5f m\n', L2);
+fprintf('L3   =  %12.5f m\n', L3);
+fprintf('L2/D =  %12.4f\n', L2D);
+fprintf('L3/D =  %12.4f\n\n', L3D);
+
+fprintf('--stator/nozzle --------------\n');
+fprintf('(s/c)noz   =  %12.4f\n', sc0stator);
+fprintf('(s/bz)noz  =  %12.4f\n', sstator);
+fprintf('pitch noz  =  %12.4f m\n', cstator );
+fprintf('chord noz  =  %12.4f m\n', sbzstator);
+fprintf('b_z noz    =  %12.4f m\n', bzstator);
+fprintf('beta_s noz =  %12.4f deg\n\n', betas);
+
+fprintf('--rotor ----------------------\n');
+fprintf('(s/c)0 rot  =  %12.4f\n', sc0);
+fprintf('(s/c)1 rot  =  %12.4f\n', sc1);
+fprintf('xi          =  %12.4f\n', xi_rot);
+fprintf('(s/c)rot    =  %12.4f\n', scopt);
+fprintf('(s/bz)rot   =  %12.4f\n', sbzrot);
+fprintf('pitch rot   =  %12.4f m\n', srot);
+fprintf('chord rot   =  %12.4f m\n', crot);
+fprintf('b_z rot     =  %12.4f m\n', bzrot);
+fprintf('beta_s rot  =  %12.4f deg\n\n', betasrot);
+
+fprintf('------------ LOSS Calculations -----------------------\n');
+fprintf('------- STATOR --------------------\n');
+fprintf('Yp_0       =  %12.5f\n', yp0);
+fprintf('Yp_1       =  %12.5f\n', yp1);
+fprintf('Yp_noz     =  %12.5f\n', yp_noz);
+fprintf('KRe_noz    =  %12.5f\n', KRe);
+fprintf('Ys_noz     =  %12.5f\n', ys_noz);
+fprintf('Y_noz      =  %12.5f\n', y_noz);
+fprintf('New Kloss_N =  %12.5f\n\n', Kloss_N);
+
+fprintf('------- ROTOR --------------------\n');
+fprintf('Yp_0       =  %12.5f\n', yp0_rot);
+fprintf('Yp_1       =  %12.5f\n', yp1_rot);
+fprintf('Yp_rot     =  %12.5f\n', yp_rot);
+fprintf('KRe_rot    =  %12.5f\n', KRe_rot);
+fprintf('Ys_rot     =  %12.5f\n', ys_rot);
+fprintf('Y_rot      =  %12.5f\n', y_rot);
+fprintf('New Kloss_R =  %12.5f\n\n', Kloss_R);
+
+fprintf('--3D Free Vortex Kinematics -------\n');
+
+fprintf('----------------- stator  exit kinematics ----------------------\n');
+fprintf('C2tip     =  %12.4f m/s\n', C2tip);
+fprintf('Cu2tip    =  %12.4f m/s\n', Cu2tip);
+fprintf('Wu2tip    =  %12.4f m/s\n', Wu2tip);
+fprintf('Wa2tip    =  %12.4f m/s\n', Wa2tip);
+fprintf('W2tip     =  %12.4f m/s\n', W2tip);
+fprintf('alfa2tip  =  %12.4f deg\n', alpha2tip);
+fprintf('alfa2ptip =  %12.4f deg\n\n', alpha2ptip);
+
+fprintf('----------------- rotor  exit kinematics ----------------------\n');
+fprintf('Wa3tip    =  %12.4f m/s\n', Wa3tip);
+fprintf('Wu3tip    =  %12.4f m/s\n', Wu3tip);
+fprintf('W3tip     =  %12.4f m/s\n', W3tip);
+fprintf('Ca3tip    =  %12.4f m/s\n', Ca3tip);
+fprintf('Cu3tip    =  %12.4f m/s\n', Cu3tip);
+fprintf('C3tip     =  %12.4f m/s\n', C3tip);
+fprintf('alfa3ptip =  %12.4f deg\n\n', alpha3ptip);
+
+fprintf('----------------- stator  exit kinematics ----------------------\n');
+fprintf('C2hub     =  %12.4f m/s\n', C2hub);
+fprintf('Cu2hub    =  %12.4f m/s\n', Cu2hub);
+fprintf('Wu2hub    =  %12.4f m/s\n', Wu2hub);
+fprintf('Wa2hub    =  %12.4f m/s\n', Wa2hub);
+fprintf('W2hub     =  %12.4f m/s\n', W2hub);
+fprintf('alfa2hub  =  %12.4f deg\n', alpha2hub);
+fprintf('alfa2phub =  %12.4f deg\n\n', alpha2phub);
+
+fprintf('----------------- rotor  exit kinematics ----------------------\n');
+fprintf('Wa3hub    =  %12.4f m/s\n', Wa3hub);
+fprintf('Wu3hub    =  %12.4f m/s\n', Wu3hub);
+fprintf('W3hub     =  %12.4f m/s\n', W3hub);
+fprintf('Ca3hub    =  %12.4f m/s\n', Ca3hub);
+fprintf('Cu3hub    =  %12.4f m/s\n', Cu3hub);
+fprintf('C3hub     =  %12.4f m/s\n', C3hub);
+fprintf('alfa3phub =  %12.4f deg\n\n', alpha3phub);
+
+%% -------- THROAT GAP OPENINGS ---------------------------------
+fprintf('----------------- Throat gap openings ----------------------\n');
+fprintf('----------STATOR --------------------------------\n');
+fprintf('o_2 mean  =  %12.5f m\n', o2);
+fprintf('o_2 tip   =  %12.5f m\n', o2tip);
+fprintf('o_2 hub   =  %12.5f m\n\n', o2hub);
+
+fprintf('----------ROTOR --------------------------------\n');
+fprintf('o_3 mean  =  %12.5f m\n', o3);
+fprintf('o_3 tip   =  %12.5f m\n', o3tip);
+fprintf('o_3 hub   =  %12.5f m\n\n', o3hub);
+
+%% -------- 3D FREE VORTEX THERMODYNAMIC QUANTITIES --------------
+fprintf('--3D Free Vortex thermodynamic quantities -------\n');
+
+fprintf('----------------- stator  exit tip     ----------------------\n');
+fprintf('T2tip     =  %12.4f K\n', T2tip);
+fprintf('P2tip     =  %12.4f Pa\n', P2tip);
+fprintf('a2tip     =  %12.4f m/s\n', a2tip);
+fprintf('M2tip     =  %12.4f\n', M2tip);
+fprintf('Mwtip     =  %12.4f\n', Mwtip);
+fprintf('Pw2tip    =  %12.4f Pa\n', Pw2tip);
+fprintf('Tw2tip    =  %12.4f K\n\n', Tw2tip);
+
+fprintf('----------------- stator  exit hub     ----------------------\n');
+fprintf('T2hub     =  %12.4f K\n', T2hub);
+fprintf('P2hub     =  %12.4f Pa\n', P2hub);
+fprintf('a2hub     =  %12.4f m/s\n', a2hub);
+fprintf('M2hub     =  %12.4f\n', M2hub);
+fprintf('Mwhub     =  %12.4f\n', Mwhub);
+fprintf('Pw2hub    =  %12.4f Pa\n', Pw2hub);
+fprintf('Tw2hub    =  %12.4f K\n\n', Tw2hub);
+
+fprintf('========== Performance ========================================\n');
+fprintf('T-T Efficiency =  %12.4f\n', ett_new );
+fprintf('T-T EffviaWork =  %12.4f\n', effworktt);
+fprintf('T-S Efficiency =  %12.4f\n', ets);
+fprintf('Power      =  %12.4f hp\n', Power);
+fprintf('Power Ett  =  %12.4f hp\n', Powerett);
+
+fprintf('\n✅ Display complete: Set B Final Pass results shown.\n');
