@@ -94,9 +94,9 @@ fprintf('L3/D =  %12.4f\n\n', L3D);
 
 fprintf('--stator/nozzle --------------\n');
 fprintf('(s/c)noz   =  %12.4f\n', sc0stator);
-fprintf('(s/bz)noz  =  %12.4f\n', sstator);
-fprintf('pitch noz  =  %12.4f m\n', cstator );
-fprintf('chord noz  =  %12.4f m\n', sbzstator);
+fprintf('(s/bz)noz  =  %12.4f\n', sbzstator);
+fprintf('pitch noz  =  %12.4f m\n', sstator );
+fprintf('chord noz  =  %12.4f m\n', cstator);
 fprintf('b_z noz    =  %12.4f m\n', bzstator);
 fprintf('beta_s noz =  %12.4f deg\n\n', betas);
 
@@ -115,18 +115,22 @@ fprintf('------------ LOSS Calculations -----------------------\n');
 fprintf('------- STATOR --------------------\n');
 fprintf('Yp_0       =  %12.5f\n', yp0);
 fprintf('Yp_1       =  %12.5f\n', yp1);
+fprintf('xi       =  %12.5f\n', xi)
 fprintf('Yp_noz     =  %12.5f\n', yp_noz);
 fprintf('KRe_noz    =  %12.5f\n', KRe);
 fprintf('Ys_noz     =  %12.5f\n', ys_noz);
+fprintf('Ycl_noz     =  %12.5f\n', ycl_noz);
 fprintf('Y_noz      =  %12.5f\n', y_noz);
 fprintf('New Kloss_N =  %12.5f\n\n', Kloss_N);
 
 fprintf('------- ROTOR --------------------\n');
 fprintf('Yp_0       =  %12.5f\n', yp0_rot);
 fprintf('Yp_1       =  %12.5f\n', yp1_rot);
+fprintf('xi       =  %12.5f\n', xi_rot);
 fprintf('Yp_rot     =  %12.5f\n', yp_rot);
 fprintf('KRe_rot    =  %12.5f\n', KRe_rot);
 fprintf('Ys_rot     =  %12.5f\n', ys_rot);
+fprintf('Ycl_rot     =  %12.5f\n', ycl_rot);
 fprintf('Y_rot      =  %12.5f\n', y_rot);
 fprintf('New Kloss_R =  %12.5f\n\n', Kloss_R);
 
