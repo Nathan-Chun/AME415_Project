@@ -107,7 +107,7 @@ srot = 2*pi*rmean/Nb3; % Pitch rot
 crot = srot/scopt; % Chord rot
 bzrot = srot/sbzrot; % bz rot
 betasrot = asin(bzrot/crot)*180/pi;
-%%
+
 % --------------------- Loss calculations ------------------------ %
 alpha1=90; % degree..Lecture 5 Row 1 calculation...need to follow up
 yp0 =Yp0(sc0stator,alpha2*180/pi);
@@ -115,10 +115,10 @@ yp1 =Yp1(sc0stator,alpha2*180/pi);
 xi =(90-abs(alpha1))/(90-abs(alpha2)*180/pi); % CONFIRM WITH PROF...alpha 1 = 90?
 yp_noz=abs(yp0+(xi^2)*(yp1-yp0)); % CONFIRM WITH PROF
 
-mu=DynVisc_H2(T2);
+mu=DynVisc_H2(T02);
 nu=mu/rho2;
 [KRe,Re_c] = K_Re(C2, cstator, nu);
-
+%%
 ys_noz= Ys(alpha1,alpha2*180/pi,cstator,L2);
 
 dL=0; % CONFIRM WITH PROF: IS dL 0 BECAUSE NOZZLE CLEARANCE IS 0 (LEC5 PG 16)
@@ -145,9 +145,9 @@ ys_rot= Ys(alpha1,alpha3p*180/pi,crot,L3);
 dL=0.0075; % CONFIRM WITH PROF: Given in Lecture 5
 ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL);
 
-%y_rot = KRe*yp_rot + ys_rot + ycl_rot;
-y_rot = 0.10828;
-
+y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+%y_rot = 0.10828;
+%%
 exp = gamma/(gamma-1);
 exp1 =(gamma-1)/(gamma);
 
@@ -174,7 +174,7 @@ Ca_new = Ca/fscale;
 U_new = U/fscale;
 
 % Set random starting checker value
-convCheck = 100;
+convCheck = 1000;
 
 while convCheck >= 10
     Ca = Ca_new;
@@ -289,8 +289,8 @@ while convCheck >= 10
     dL=0.0075; % CONFIRM WITH PROF: Given in Lecture 5
     ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL);
     
-    %y_rot = KRe*yp_rot + ys_rot + ycl_rot;
-    y_rot = 0.10828;
+    y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+    %y_rot = 0.10828;
     
     exp = gamma/(gamma-1);
     exp1 =(gamma-1)/(gamma);
@@ -415,97 +415,97 @@ Powerett = delh0is * ett * massflow / 745.6999; % NEED TO CHECK should be 931.38
 %% ----------------- CHECKS WITH HARDCODED VALUES ----------------- %%
 
 %% check using correct values from PDF
-nozInAng = 90;
-C0 = 742.4396 ;
-U = 458.7987 ;
-Ca = 206.4594 ;
+%nozInAng = 90;
+%C0 = 742.4396 ;
+%U = 458.7987 ;
+%Ca = 206.4594 ;
 
-C2 = 545.2760 ;
-Cu2 = 504.6786 ;
-Ca2 = 206.4594 ;
-Wu2 = 45.8799 ;
-Wa2 = 206.4594 ;
-W2 = 211.4958 ;
-alfa2 = 22.2490; 
-alfa2p = 77.4712; 
+%C2 = 545.2760 ;
+%Cu2 = 504.6786 ;
+%Ca2 = 206.4594 ;
+%Wu2 = 45.8799 ;
+%Wa2 = 206.4594 ;
+%W2 = 211.4958 ;
+%alfa2 = 22.2490; 
+%alfa2p = 77.4712; 
 
-Wa3 = 206.4594 ;
-Wu3 = -458.7987 ;
-W3 = 503.1121 ;
-Ca3 = 206.4594 ;
-Cu3 = 0.0000 ;
-C3 = 206.4594 ;
-alfa3p = -24.2277; 
+%Wa3 = 206.4594 ;
+%Wu3 = -458.7987 ;
+%W3 = 503.1121 ;
+%Ca3 = 206.4594 ;
+%Cu3 = 0.0000 ;
+%C3 = 206.4594 ;
+%alfa3p = -24.2277; 
 
-a2 = 2139.5103 ;
-Mw2 = 0.0989;
-Ma2 = 0.2549;
-T2 = 789.5984; 
-To2 = 800.0000; 
-Tw2 = 791.1632 ;
+%a2 = 2139.5103 ;
+%Mw2 = 0.0989;
+%Ma2 = 0.2549;
+%T2 = 789.5984; 
+%To2 = 800.0000; 
+%Tw2 = 791.1632 ;
 
-a3 = 2129.61 ;
-Mw3 = 0.2362;
-Ma3 = 0.0969;
-T3 = 782.3080; 
-T03 = 783.7991; 
-Tw3 = 791.1627 ;
+%a3 = 2129.61 ;
+%Mw3 = 0.2362;
+%Ma3 = 0.0969;
+%T3 = 782.3080; 
+%T03 = 783.7991; 
+%Tw3 = 791.1627 ;
 
-P01 = 185000.0000; 
-P02 = 184462.2382 ;
-P2 = 176283.4733 ;
-Pw2 = 177497.0817 ;
-rho2 = 0.0541 ;
-Pw3 = 176761.9696; 
-P3 = 170000.0000 ;
-P3ver = 170000.1864;
-P03 = 171125.7511 ;
-rho3 = 0.0527;
+%P01 = 185000.0000; 
+%P02 = 184462.2382 ;
+%P2 = 176283.4733 ;
+%Pw2 = 177497.0817 ;
+%rho2 = 0.0541 ;
+%Pw3 = 176761.9696; 
+%P3 = 170000.0000 ;
+%P3ver = 170000.1864;
+%P03 = 171125.7511 ;
+%rho3 = 0.0527;
 
-rmean= 0.43812; 
-L2 = 0.10835 ;
-L3 = 0.11132 ;
-L2D = 0.1237;
-L3D = 0.1270;
+%rmean= 0.43812; 
+%L2 = 0.10835 ;
+%L3 = 0.11132 ;
+%L2D = 0.1237;
+%L3D = 0.1270;
 
-sc0stator = 0.7534;
-sbzstator = 1.1414;
-sstator = 0.0324 ;
-cstator = 0.0430 ;
-bzstator = 0.0284 ;
-betas = 41.3023;
+%sc0stator = 0.7534;
+%sbzstator = 1.1414;
+%sstator = 0.0324 ;
+%cstator = 0.0430 ;
+%bzstator = 0.0284 ;
+%betas = 41.3023;
 
-sc0 = 0.7769;
-sc1 = 0.5755;
-xi_rot = 0.1905;
-scopt = 0.7695;
-sbzrot = 0.9717;
-srot = 0.0344 ;
-crot = 0.0447;
-bzrot = 0.0354; 
-betasrot = 52.3677;
+%sc0 = 0.7769;
+%sc1 = 0.5755;
+%xi_rot = 0.1905;
+%scopt = 0.7695;
+%sbzrot = 0.9717;
+%srot = 0.0344 ;
+%crot = 0.0447;
+%bzrot = 0.0354; 
+%betasrot = 52.3677;
 
-yp0 = 0.03397;
-yp1 = 0.14010;
-xi = 0.00000;
-yp_noz = 0.03397;
-KRe = 1.13634;
-ys_noz = 0.02715;
-ycl_noz = 0.00000;
-y_noz = 0.06575;
-New_Kloss_N = 0.99709;
-Kloss_N = New_Kloss_N;
+%yp0 = 0.03397;
+%yp1 = 0.14010;
+%xi = 0.00000;
+%yp_noz = 0.03397;
+%KRe = 1.13634;
+%ys_noz = 0.02715;
+%ycl_noz = 0.00000;
+%y_noz = 0.06575;
+%New_Kloss_N = 0.99709;
+%Kloss_N = New_Kloss_N;
 
-yp0_rot = 0.03023;
-yp1_rot = 0.13052;
-xi_rot = 0.19049;
-yp_rot = 0.03387;
-KRe_rot = 1.17253;
-ys_rot = 0.03210;
-ycl_rot = 0.03690;
-y_rot = 0.10872;
-New_Kloss_R = 0.99586;
-Kloss_R = New_Kloss_R;
+%yp0_rot = 0.03023;
+%yp1_rot = 0.13052;
+%xi_rot = 0.19049;
+%yp_rot = 0.03387;
+%KRe_rot = 1.17253;
+%ys_rot = 0.03210;
+%ycl_rot = 0.03690;
+%y_rot = 0.10872;
+%New_Kloss_R = 0.99586;
+%Kloss_R = New_Kloss_R;
 %%
 % --3D Free Vortex Kinematics ------- %
 % ----------------- stator exit kinematics ---------------------- %

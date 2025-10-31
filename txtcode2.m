@@ -8,29 +8,30 @@ fprintf('============================================================\n\n');
 
 %% =========== INPUT ==============================================
 fprintf('=========== INPUT ==============================================\n');
-fprintf('Po1          =  185000.0000 Pa\n');
-fprintf('To1          =     800.0000 K\n');
-fprintf('P3           =  170000.0000 Pa\n');
-fprintf('Massflow     =       3.0000 Kg/s\n');
-fprintf('Shaft Speed  =   10000.0000 RPM\n');
-fprintf('Noz In angle =      90.0000 deg\n\n');
+fprintf('Po1          =  %12.4f Pa\n', P01);
+fprintf('To1          =  %12.4f K\n', T01);
+fprintf('P3           =  %12.4f Pa\n', P3);
+fprintf('Massflow     =  %12.4f Kg/s\n', mdot);
+fprintf('Shaft Speed  =  %12.4f RPM\n', Nrpm);
+fprintf('Noz In angle =  %12.4f deg\n\n', nozInAng);
 
 fprintf('------- fluid thermodynamic properties ------------\n');
-fprintf('gamma =       1.4056\n');
-fprintf('Rgas  =    4124.4000 J/Kg-K\n');
-fprintf('Cp    =   14292.3000 J/Kg-K\n\n');
+fprintf('gamma =  %12.4f\n', gamma);
+fprintf('Rgas  =  %12.4f J/Kg-K\n', Rgas);
+fprintf('Cp    =  %12.4f J/Kg-K\n\n', cp);
 
 fprintf('------- Choice of design parameters ---------------\n');
-fprintf('Phi     =       0.4500\n');
-fprintf('Psi     =       1.1000\n');
-fprintf('Stator nr vanes  =      85.0000\n');
-fprintf('Rotor nr blades  =      80.0000\n\n');
+fprintf('Phi     =  %12.4f\n', Phi);
+fprintf('Psi     =  %12.4f\n', Psi);
+fprintf('Stator nr vanes  =  %12.4f\n', Nb2);
+fprintf('Rotor nr blades  =  %12.4f\n\n', Nb3);
 
 fprintf('------- First guess values of parameters ----------\n');
-fprintf('Efficiency  =       0.9000\n');
-fprintf('Kloss_N     =       0.9980\n');
-fprintf('Kloss_R     =       0.9920\n');
-fprintf('Blockage    =       0.9000\n\n');
+fprintf('Efficiency  =  %12.4f\n', ett);
+fprintf('Kloss_N     =  %12.4f\n', Kloss_N);
+fprintf('Kloss_R     =  %12.4f\n', Kloss_R);
+fprintf('Blockage    =  %12.4f\n\n', BL);
+
 
 %% ======================= OUTPUT ================================
 fprintf('======================= Output =================================\n');
@@ -45,8 +46,8 @@ fprintf('Ca2    =  %12.4f m/s\n', Ca2);
 fprintf('Wu2    =  %12.4f m/s\n', Wu2);
 fprintf('Wa2    =  %12.4f m/s\n', Wa2);
 fprintf('W2     =  %12.4f m/s\n', W2);
-fprintf('alfa2  =  %12.4f deg\n', alfa2);
-fprintf('alfa2p =  %12.4f deg\n\n', alfa2p);
+fprintf('alfa2  =  %12.4f deg\n', alpha2);
+fprintf('alfa2p =  %12.4f deg\n\n', alpha2p);
 
 fprintf('----------------- rotor  exit kinematics ----------------------\n');
 fprintf('Wa3    =  %12.4f m/s\n', Wa3);
@@ -55,14 +56,14 @@ fprintf('W3     =  %12.4f m/s\n', W3);
 fprintf('Ca3    =  %12.4f m/s\n', Ca3);
 fprintf('Cu3    =  %12.4f m/s\n', Cu3);
 fprintf('C3     =  %12.4f m/s\n', C3);
-fprintf('alfa3p =  %12.4f deg\n\n', alfa3p);
+fprintf('alfa3p =  %12.4f deg\n\n', alpha3p);
 
 fprintf('----------------- thermodynamic quantities stator exit ---------------\n');
 fprintf('a2     =  %12.4f m/s\n', a2);
 fprintf('Mw2    =  %12.4f\n', Mw2);
 fprintf('Ma2    =  %12.4f\n', Ma2);
 fprintf('T2     =  %12.4f K\n', T2);
-fprintf('To2    =  %12.4f K\n', To2);
+fprintf('To2    =  %12.4f K\n', T02);
 fprintf('Tw2    =  %12.4f K\n\n', Tw2);
 
 fprintf('----------------- thermodynamic quantities rotor exit ----------------\n');
@@ -128,7 +129,7 @@ fprintf('Yp_0       =  %12.5f\n', yp0_rot);
 fprintf('Yp_1       =  %12.5f\n', yp1_rot);
 fprintf('xi       =  %12.5f\n', xi_rot);
 fprintf('Yp_rot     =  %12.5f\n', yp_rot);
-fprintf('KRe_rot    =  %12.5f\n', KRe_rot);
+fprintf('KRe_rot    =  %12.5f\n', KRe_rotor);
 fprintf('Ys_rot     =  %12.5f\n', ys_rot);
 fprintf('Ycl_rot     =  %12.5f\n', ycl_rot);
 fprintf('Y_rot      =  %12.5f\n', y_rot);
