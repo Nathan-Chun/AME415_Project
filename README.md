@@ -13,3 +13,5 @@
 - NOTE: Don't Run All.  "CHECKS WITH HARDCODED VALUES" contains hardcoded verification inputs and will overwrite calculated values
 - Use "CHECKS WITH HARDCODED VALUES" for debugging
 
+Try table of phi and psi
+find values to get power that satisfy the two restrictions

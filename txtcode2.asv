@@ -45,8 +45,6 @@ fprintf('Ca2    =  %12.4f m/s\n', Ca2);
 fprintf('Wu2    =  %12.4f m/s\n', Wu2);
 fprintf('Wa2    =  %12.4f m/s\n', Wa2);
 fprintf('W2     =  %12.4f m/s\n', W2);
-fprintf('alfa2  =  %12.4f deg\n', alpha2);
-fprintf('alfa2p =  %12.4f deg\n\n', alpha2p);
 fprintf('alfa2  =  %12.4f deg\n', alpha2*180/pi);
 fprintf('alfa2p =  %12.4f deg\n\n', alpha2p*180/pi);
 
@@ -57,7 +55,6 @@ fprintf('W3     =  %12.4f m/s\n', W3);
 fprintf('Ca3    =  %12.4f m/s\n', Ca3);
 fprintf('Cu3    =  %12.4f m/s\n', Cu3);
 fprintf('C3     =  %12.4f m/s\n', C3);
-fprintf('alfa3p =  %12.4f deg\n\n', alpha3p);
 fprintf('alfa3p =  %12.4f deg\n\n', alpha3p*180/pi);
 
 fprintf('----------------- thermodynamic quantities stator exit ---------------\n');
