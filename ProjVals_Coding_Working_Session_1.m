@@ -12,8 +12,8 @@ Nrpm = 15000.00; %RPM
 % Geometry and Design Parameters
 Nb2 = 85.00 % # of Airfoils stator
 Nb3 = 80.00 % # of Airfoils rotor
-Phi = 0.45 % Flow parameter
-Psi = 1.10 % Loading factor
+Phi = 0.05 % Flow parameter
+Psi = 0.99310 % Loading factor
 BL = 0.90 % Flow blockage
 
 % Initial Guess at Efficiency and Loss Factors

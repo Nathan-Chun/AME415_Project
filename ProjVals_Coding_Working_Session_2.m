@@ -12,8 +12,8 @@ Nrpm = 15000.00; %RPM
 % Geometry and Design Parameters
 Nb2 = 85.00 % # of Airfoils stator
 Nb3 = 80.00 % # of Airfoils rotor
-Phi = 0.45 % Flow parameter
-Psi = 1.10 % Loading factor
+Phi = 0.5 % Flow parameter
+Psi = 1.4 % Loading factor
 BL = 0.90 % Flow blockage
 
 % Initial Guess at Efficiency and Loss Factors
@@ -161,7 +161,7 @@ P03 = P3ver*((1+((gamma-1)/2)*M3^2)^exp);
 ett = (1-(T03/T01)) / (1-(P03/P01)^exp1); % Check with Prof - input values may be incorrect
 
 %Power Calculations
-massflow = 3;
+massflow = 32;
 work = U * C2u;
 Power = work * mdot/745.7;
 
@@ -178,7 +178,7 @@ U_new = U/fscale;
 % Set random starting checker value
 convCheck = 100;
 
-% while convCheck >= 10
+while convCheck >= 10
     Ca = Ca_new;
     U = U_new
     
@@ -273,7 +273,7 @@ convCheck = 100;
     y_noz = KRe*yp_noz + ys_noz + ycl_noz;
     
     Kloss_N=(((1+((gamma-1)*M2^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*M2^2)/2)^(gamma/(gamma-1)))*(y_noz+1)-y_noz);
-    
+    Kloss_N_guess = Kloss_N;
     % --------------------- Loss calculations Rotor ------------------------ %
     alpha1=alpha2p*180/pi; % degree..Lecture 5 Row 1 calculation...need to follow up
     yp0_rot =Yp0(sc0,alpha3p*180/pi);
@@ -291,13 +291,14 @@ convCheck = 100;
     dL=0.0075; % CONFIRM WITH PROF: Given in Lecture 5
     ycl_rot=Ycl(alpha1, alpha3p*180/pi, crot, L3, dL);
     
-    %y_rot = KRe*yp_rot + ys_rot + ycl_rot;
-    y_rot = 0.10828;
+    y_rot = KRe*yp_rot + ys_rot + ycl_rot;
+    % y_rot = 0.10828;
     
     exp = gamma/(gamma-1);
     exp1 =(gamma-1)/(gamma);
     
     Kloss_R=(((1+((gamma-1)*Mw3^2)/2))^(gamma/(gamma-1)))/(((1+((gamma-1)*Mw3^2)/2)^(gamma/(gamma-1)))*(y_rot+1)-y_rot);
+    Kloss_R_guess=Kloss_R;
     T03 = T3*(1+((gamma-1)/2)*M3^2);
     
     P03 = P3ver*((1+((gamma-1)/2)*M3^2)^exp);
@@ -309,7 +310,7 @@ convCheck = 100;
     fscale = P3/P3ver
     Ca_new = Ca/fscale;
     U_new = U/fscale;
-% end
+end
 
 % --3D Free Vortex Kinematics ------- %
 % ----------------- stator exit kinematics ---------------------- %
