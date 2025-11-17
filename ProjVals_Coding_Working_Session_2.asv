@@ -10,8 +10,8 @@ mdot = 32.00 %kg/s
 Nrpm = 15000.00; %RPM
 
 % Geometry and Design Parameters
-Nb2 = 150.00 % # of Airfoils stator
-Nb3 = 150.00 % # of Airfoils rotor
+Nb2 = 85.00 % # of Airfoils stator
+Nb3 = 80.00 % # of Airfoils rotor
 % Phi = 0.5 % Flow parameter
 % Psi = 1.4 % Loading factor
 Phi = 0.4708 % Flow parameter
@@ -98,7 +98,7 @@ sc0stator = 0.427 + abs(alpha2*180/pi)/58 - (abs(alpha2*180/pi)/93)^2;
 sstator = 2*pi*rmean/(Nb2); % Pitch noz
 cstator = sstator/sc0stator; % Chord noz
 sbzstator = 0.8/(2*sin(alpha2)^2*(cot(alpha2 - cot(90*pi/180)))); % Assume alpha3 = 90
-bzstator = sstator/sbzstator; % bz noz (bz is axial chord)
+bzstator = sstator/sbzstator; % bz noz
 betas = asin(bzstator/cstator)*180/pi;
 
 % --------------------- Rotor ------------------------ %
